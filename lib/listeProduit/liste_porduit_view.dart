@@ -4,7 +4,6 @@ import 'package:metastock/const/color.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../CustomWidget/MouvementCardCustomWidget.dart';
-import '../model/product.dart';
 import 'cubit/liste_produit_cubit.dart';
 
 class ListeProduitView extends StatelessWidget {
@@ -14,7 +13,7 @@ class ListeProduitView extends StatelessWidget {
   Widget build(BuildContext context) {
     ListeProduitCubit cubitWatch = context.watch<ListeProduitCubit>();
     ListeProduitCubit cubitRead = context.read<ListeProduitCubit>();
-    List<Product> listPorduct = cubitRead.generateRandomProducts(18);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -50,7 +49,9 @@ class ListeProduitView extends StatelessWidget {
           visible: cubitWatch.state.visibilityListePorduit,
           child: Expanded(
               flex: 9,
-              child: GridView.count(crossAxisCount: 2, children: listPorduct)),
+              child: GridView.count(
+                  crossAxisCount: 2,
+                  children: cubitRead.generateRandomProductCards(18))),
         ),
         Visibility(
           visible: !cubitWatch.state.visibilityListePorduit,

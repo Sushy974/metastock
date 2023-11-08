@@ -6,17 +6,17 @@ import '../model/product.dart';
 
 class ProduitCardCustomWidget extends StatelessWidget {
   const ProduitCardCustomWidget({required this.product});
-   final Product product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               offset: Offset(1, 1),
               blurRadius: 2,
@@ -27,26 +27,27 @@ class ProduitCardCustomWidget extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(15.0),
           child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Column(
               children: [
-                Image(
+                const Image(
                   image: AssetImage("assets/image/metastock.png"),
                   height: 100,
                 ),
-                Text("Stock : " + $product. + " ", style: styleSmall),
+                Text("Stock : " + product.stock.toString() + " ",
+                    style: styleSmall),
                 Text("Price : ", style: styleSmall),
-                Text("679,90 \$", style: styleSmall),
+                Text(product.uniprice.toString() + "\$", style: styleSmall),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Flexible(
               flex: 1,
               child: Text(
-                "GIGABYTE GEFORCE RTX 4070",
+                product.name,
               ),
             )
           ]),

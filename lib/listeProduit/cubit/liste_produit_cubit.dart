@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../CustomWidget/MouvementCardCustomWidget.dart';
+import '../../CustomWidget/ProduitCardCustomWidget.dart';
 import '../../model/product.dart';
 
 part 'liste_produit_state.dart';
@@ -44,23 +45,23 @@ class ListeProduitCubit extends Cubit<ListeProduitState> {
     return random.nextInt(101);
   }
 
-  List<Product> generateRandomProducts(int count) {
+  // Fonction pour générer un Product avec des valeurs aléatoires
+  Product generateRandomProduct() {
     final random = Random();
-    List<Product> products = [];
+    return Product(
+      random.nextBool(),
+      'Description ${random.nextInt(1000)}',
+      'Product ${random.nextInt(1000)}',
+      'assets/image/metastock.png', // Suppose que vous avez une image par défaut
+      random.nextInt(100),
+      random.nextInt(10),
+      random.nextInt(500) + 1, // +1 pour éviter un prix de 0
+    );
+  }
 
-    for (int i = 0; i < count; i++) {
-      bool archive = random.nextBool();
-      String description = 'Product Description ${random.nextInt(1000)}';
-      String name = 'Product ${random.nextInt(1000)}';
-      String picture = 'assets/images/product_${random.nextInt(100)}.png';
-      int stock = random.nextInt(100);
-      int threshold = random.nextInt(10);
-      int uniprice = random.nextInt(1000);
-
-      products.add(Product(
-          archive, description, name, picture, stock, threshold, uniprice));
-    }
-
-    return products;
+// Fonction pour générer une liste de ProduitCardCustomWidget avec des Products aléatoires
+  List<ProduitCardCustomWidget> generateRandomProductCards(int count) {
+    return List.generate(count,
+        (index) => ProduitCardCustomWidget(product: generateRandomProduct()));
   }
 }
